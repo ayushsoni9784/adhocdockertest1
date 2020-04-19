@@ -1,0 +1,97 @@
+Answer 1 
+
+Docker basic question
+
+First chnaging the image tag to my name 
+
+docker image tag alpine:latest alpine:ayush
+
+Now creating a container with name ayushc1q1 and saving output in question1.txt 
+
+docker run -it --name ayushc1q1 alpine:ayush date +%H:%M:%S >> question1.txt 
+
+again saving the output to the question1.txt 
+but first removing the conatiner as it has the same name 
+
+docker rm ayushc1q1
+docker run -it --name ayushc1q1 alpine:ayush date +%H:%M:%S >> question1.txt
+
+--------------------------------------------------------------------------------------------------------------------
+
+Answer 2 
+
+Build and push docker image to docker Hub 
+
+First creating a docker image with git link  and with name adhoc:ayush
+
+docker build -t adhoc:ayush https://github.com/redashu/summer2020dockertest.git
+
+now retagging it with docker hub username so that it can be pushed on docker hub 
+
+docker tag adhoc:ayush ayushsoni9784/adhoc:ayush
+
+now finally pusing it to docker hub 
+
+docker login
+docker push ayushsoni9784/adhoc:ayush
+docker logout 
+
+------------------------------------------------------------------------------------------------------------------
+
+Answer 3 
+
+Deploy web application 
+
+Creating container with name ayushc3q3 as expoesd port is 80 and i am allowing port 1478 using the image name dockerashu/ckad:v2
+docker run -itd --name ayushc3q3 -p 1478:80 dockerashu/ckad:v2
+
+and creating a text file named question3.txt as there are 7 keywords of docker on webapp.
+
+------------------------------------------------------------------------------------------------------------------
+
+Answer 4 
+
+create a dockerfile and build docker image push it to docker hub 
+
+First clone the git repo
+git clone https://github.com/redashu/beginner-html-site-styled
+mv beginner-html-site-styled/ webapp
+
+Now creating a Dockerfile 
+```
+FROM centos
+MAINTAINER ayushsoni626@gmail.com
+RUN yum install httpd -y
+COPY webapp /var/www/html/
+EXPOSE 80
+ENTRYPOINT ["/usr/sbin/httpd","-D","FOREGROUND"]
+```
+
+Now creating .dockerignore file 
+```
+Dockerfile
+.git 
+LICENSE
+*.md 
+``` 
+Now building image 
+docker build -t ayush:q4 .
+
+now checking the image and building an container 
+docker run -itd --name ayushc4q4 -p 1598:80 ayush:q4 
+
+now pushing the docker image to docker hub 
+docker tag ayush:q4 ayushsoni9784/ayush:q4 
+docker login 
+docker push ayushsoni9784/ayush:q4
+---------------------------------------------------------------------------------------------------------------------------
+
+Answer 5 
+
+Docker volume 
+Creating a Docker volume  
+docker volume create ayushq5
+docker run -it --name ayushc5q5 -v /etc/passwd:/user.txt -v ayushq5:/adhocvol alpine wc -l user.txt>>/adhocvol/usercount.txt 
+
+
+
